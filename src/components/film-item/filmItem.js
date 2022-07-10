@@ -1,24 +1,9 @@
-import {Component} from 'react'
 import './filmItem.css';
 
-class FilmItem extends Component  {
-    constructor(props){
-        super(props);
-        this.state= {
-            increase: false,
-        }
-
-    }
-
-    status =()=> {
-        this.setState(({increase}) => ({
-            increase : !increase
-        }))
-    }
-    
-    render(){
-        const {name, rating, onDelete } = this.props;
-        const {increase} = this.state;
+const FilmItem =(props)=> {
+   
+        const {name, rating, onDelete,ToggleIncrease, increase} = props;
+      
         let clssName = "list-group-item d-flex justify-content-between";
         if(increase){
             clssName  += " increase like";
@@ -30,7 +15,7 @@ class FilmItem extends Component  {
             <div className='d-flex justify-content-center align-items-center'>
                 <button type="button"
                     className="btn-cookie btn-sm "
-                    onClick= {this.status} >
+                    onClick= {ToggleIncrease}>
                     <i className="fas fa-cookie"></i>
                 </button>
 
@@ -43,6 +28,6 @@ class FilmItem extends Component  {
             </div>
         </li>
     );
-    }
+    
 }
 export default FilmItem;

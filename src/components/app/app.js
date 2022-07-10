@@ -11,14 +11,40 @@ class App extends Component{
         super(props);
         this.state = {
             data : [
-                {name:'Harry Porter', rating:'12',  id: 1},
-                {name:'Sunset', rating:'10',  id: 2},
-                {name:'Summer', rating:'5', id: 3},
-                {name:'Echo', rating:'12', id: 4}
-
-        
-            ]
+                {name:'Harry Potter', rating:'12', increase: false, id: 1},
+                {name:'Sunset', rating:'10',increase: false, id: 2},
+                {name:'Summer', rating:'5',increase: false, id: 3},
+                {name:'Echo', rating:'12',increase: false, id: 4}
+            ],
+            temp : ""
+            
         }
+        this.maxId = 5;
+    }
+
+    addItem = (name, rating) => {
+        const newItem = {
+            name, 
+            rating,
+            increase: false,
+            id: this.maxId ++
+          }
+        this.setState(({data}) => {
+            const newArr = [...data, newItem];
+            return {
+                data: newArr
+            }
+        });
+    }
+    ToggleIncrease =(id)=> {
+            this.setState (({data}) => ({
+                data: data.map(item=>{
+                    if(item.id === id){
+                        return {...item, increase: !item.increase}
+                    }
+                    return item;
+                })
+            }))
     }
 
     deleteItem =(id)=> {
@@ -28,18 +54,39 @@ class App extends Component{
                     }
         })
     }
+
+    searchFilm =(items, temp)=> {
+        if(temp.length === 0){return items};
+        return items.filter(item =>{
+            return item.name.indexOf(temp) > -1;
+        })
+    }
+    UpdateSearch =(temp)=> {
+        this.setState({temp});
+    }
+
   render(){
+    const {data, temp} = this.state, 
+         visibleData = this.searchFilm(data, temp),
+         AllFilms = this.state.data.length,
+         BestFilms = this.state.data.filter(item => item.increase).length;
+          
     
     return (
+        
         <div className="app">
-            <Info/>
+            <Info AllFilms={AllFilms}
+                  BestFilms= {BestFilms}/>
             <div className="search-panel">
-                <Search/>
+                <Search UpdateSearch = {this.UpdateSearch}/>
                 <Filter/>
             </div>
-            <FilmList data={this.state.data}
-                      onDelete={this.deleteItem}/>
-            <FilmAdd/>
+            <FilmList data={visibleData}
+                      
+                      onDelete={this.deleteItem}
+                      ToggleIncrease= {this.ToggleIncrease}
+                      />
+            <FilmAdd onAdd={this.addItem}/>
         </div>
     );
   }
