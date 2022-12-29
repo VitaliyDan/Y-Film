@@ -1,0 +1,19 @@
+.app-add-form {
+    margin-top: 30px;
+    padding: 25px;
+    background-color: #3d5a80;
+    border-radius: 25px;
+    box-shadow: 15px 15px 30px rgba(0,0,0, .15);
+    color: #fff;
+    background: rgb(21,43,50);
+    background: linear-gradient(90deg, rgb(121, 62, 68) 27%, rgba(128,139,101,1) 76%, rgba(148,187,233,0.03547356442577032) 100%);
+}
+
+.add-form {
+    margin-top: 20px;
+}
+
+.add-form input {
+    width: 350px;
+    margin-right: 20px;
+}

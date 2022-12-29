@@ -1,0 +1,77 @@
+
+.list-group-item {
+    padding: 15px 20px;
+    border-bottom: 1.3px solid;
+    background: rgb(21,43,50);
+    background: linear-gradient(90deg, rgb(121, 62, 68) 27%, rgba(128,139,101,1) 76%, rgba(148,187,233,0.03547356442577032) 100%);
+}
+
+.list-group-item:last-child {
+    border-bottom: none;
+}
+
+.list-group-item span {
+    line-height: 30px;
+    color: #0c0e0c;
+    font-size: 30px;
+    cursor: pointer;
+    min-width: 550px;
+}
+
+.list-group-item input {
+    line-height: 10px;
+    font-size: 20px;
+    text-align: center;
+    width: 50px;
+    border-radius: 15px;
+    background-color: #e4e4ae;
+}
+
+.list-group-item button {
+    width: 35px;
+    height: 35px;
+    margin: 3px;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+}
+
+.list-group-item .btn-cookie {
+    color: #e09f3e;
+    background-color: transparent;
+}
+
+.list-group-item .btn-trash {
+    color: #e5383b;
+    background-color: transparent;
+}
+.list-group-item .fa-star {
+    width: 35px;
+    height: 35px;
+    text-align: center;
+    line-height: 35px;
+    font-size: 16px;
+    color: #FFD700;
+    transition: 0.3s all;
+    transform: translateX(30px);
+    opacity: 0;
+}
+
+.list-group-item.like .fa-star {
+    opacity: 1;
+    transform: translateX(0px);
+}
+.list-group-item .bi-trash {
+    color: #e09f3e;
+}
+.bi-trash{
+    max-width: 50px;
+    max-height: 50px;
+} 
+.list-group-item.increase .list-group-item-label, .list-group-item.increase .list-group-item-input {
+    color: #e09f3e;
+}
+  
+.list-group-item.increase .btn-star {
+    color: #aeaeae;
+}

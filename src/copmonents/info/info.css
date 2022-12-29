@@ -1,0 +1,12 @@
+.app-info {
+    padding: 25px;
+    margin-top: 20px;
+    border-radius: 25px;
+    box-shadow: 15px 15px 30px rgba(0,0,0, .15);
+    text-align: center;
+    background: rgb(21,43,50);
+background: linear-gradient(90deg, rgb(121, 62, 68) 27%, rgba(128,139,101,1) 76%, rgba(148,187,233,0.03547356442577032) 100%);
+}
+.textColor{
+    color: #0c0e0c
+}
