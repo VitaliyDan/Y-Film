@@ -1,14 +1,15 @@
 
 .list-group-item {
     padding: 15px 20px;
+    height: 73px;
     border-bottom: 1.3px solid;
     background: rgb(21,43,50);
     background: linear-gradient(90deg, rgb(121, 62, 68) 27%, rgba(128,139,101,1) 76%, rgba(148,187,233,0.03547356442577032) 100%);
 }
 
-.list-group-item:last-child {
+/* .list-group-item:last-child {
     border-bottom: none;
-}
+} */
 
 .list-group-item span {
     line-height: 30px;

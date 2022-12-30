@@ -19,7 +19,7 @@ class FilmListItem extends Component {
     }
 
     render(){
-        const {name, rating, onDelete} = this.props,
+        const {filmName, rating, onDelete} = this.props,
               {best, save} = this.state;
         let classListGroup = "list-group-item d-flex justify-content-between";
         if (best){
@@ -30,7 +30,7 @@ class FilmListItem extends Component {
         }
      return (
          <li className= {classListGroup} >
-             <span onClick={this.MySaved} className="list-group-item-label">{name}</span>
+             <span onClick={this.MySaved} className="list-group-item-label">{filmName}</span>
              <input type="text" className="list-group-item-input" defaultValue={rating + ' ★'}/>
              <div className= "d-flex justify-content-center align-items-center">
                  <button type="button"

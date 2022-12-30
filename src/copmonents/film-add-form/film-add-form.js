@@ -13,13 +13,22 @@ class FilmAddForm extends Component {
             [e.target.name]: e.target.value
         })
     }
+    onSubmit = (e) => {
+        e.preventDefault();
+        this.props.onAddFilm(this.state.filmName, this.state.rating);
+        this.setState({
+            filmName: '',
+            rating: ''
+        })
+    }
     render(){
         const {filmName, rating} = this.state;
         return (
             <div className="app-add-form">
                 <h3 className='textColor'>Add new film</h3>
                 <form
-                    className="add-form d-flex">
+                    className="add-form d-flex"
+                    onSubmit={this.onSubmit}>
                     <input type="text"
                         onChange={this.onValueChange}
                         value={filmName}

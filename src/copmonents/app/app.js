@@ -13,11 +13,14 @@ class App extends Component {
             super(props);
             this.state ={
                 FilmDB: [
-                    { id: 1 , name:'Sumer', rating: 5},
-                    { id: 2 , name:'Out Days', rating: 4},
-                    { id: 3 , name:'Timbernborn', rating: 12}
+                    { id: 1 , filmName:'Sumer', rating: 5},
+                    { id: 2 , filmName:'Out Days', rating: 4},
+                    { id: 3 , filmName:'Timbernborn', rating: 12},
+                    { id: 4 , filmName:'Dark Soul', rating: 10},
+                    { id: 5 , filmName:'House', rating: 8}
                 ]
             }
+            this.maxIdValue = 6;
     }
 
     deleteFilm =(id)=>{
@@ -25,7 +28,19 @@ class App extends Component {
             return {FilmDB: FilmDB.filter(item => item.id !== id)}
         })
     }
-
+    addNewFilm = (filmName, rating) => {
+        const newItem = {
+            id: this.maxIdValue++,
+            filmName, 
+            rating
+        }
+        this.setState(({FilmDB}) => {
+            const newArr = [...FilmDB, newItem];
+            return {
+                FilmDB: newArr
+            }
+        });
+    }
     render(){
         return(
             <div className='app'>
@@ -37,7 +52,7 @@ class App extends Component {
                 <FilmList 
                 data={this.state.FilmDB}
                 onDelete = {this.deleteFilm}/>
-                <FilmAddForm/>
+                <FilmAddForm onAddFilm = {this.addNewFilm}/>
     
             </div>
         )
