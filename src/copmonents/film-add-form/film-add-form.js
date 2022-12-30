@@ -1,21 +1,43 @@
+import { Component } from 'react';
 import './film-add-form.css'
-function FilmAddForm (){
-    return (
-        <div className="app-add-form">
-            <h3 className='textColor'>Add new film</h3>
-            <form
-                className="add-form d-flex">
-                <input type="text"
-                    className="form-control new-post-label"
-                    placeholder="Film name" />
-                <input type="number"
-                    className="form-control new-post-label"
-                    placeholder="Raiting" />
-
-                <button type="submit"
-                        className="btn btn-outline-light">Add</button>
-            </form>
-        </div>
-    )
+class FilmAddForm extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            filmName: '',
+            rating: ''
+        }
+    }
+    onValueChange = (e) =>{
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+    render(){
+        const {filmName, rating} = this.state;
+        return (
+            <div className="app-add-form">
+                <h3 className='textColor'>Add new film</h3>
+                <form
+                    className="add-form d-flex">
+                    <input type="text"
+                        onChange={this.onValueChange}
+                        value={filmName}
+                        name="filmName"
+                        className="form-control new-post-label"
+                        placeholder="Film name" />
+                    <input type="number"
+                        onChange={this.onValueChange}
+                        value={rating}
+                        name="rating"
+                        className="form-control new-post-label"
+                        placeholder="rating" />
+    
+                    <button type="submit"
+                            className="btn btn-outline-light">Add</button>
+                </form>
+            </div>
+        )
+    }
 }
 export default FilmAddForm;
