@@ -1,10 +1,20 @@
 import './filter.css';
-function AppFilter(){
+function AppFilter(props){
+    
+    const buttonsGroup = [
+        {name: 'all', label: 'All Films'},
+        {name: 'best', label: 'The Best Films'},
+        {name: 'saved', label: 'Your Saved'}
+    ];
+    const buttons = buttonsGroup.map(({name, label})=> {
+        const active = props.filter === name,
+              clazz = active ? 'btn-light' : 'btn-outline-light';
+        return <button className={`btn ${clazz}`} type="button" key={name} onClick ={()=> props.onFilterSelect(name)}>{label}</button>
+    })
+
     return(
         <div className="btn-group">
-            <button className="btn btn-light" type="button">All Films</button>
-            <button className="btn btn-outline-light" type="button">The Best Films</button>
-            <button className="btn btn-outline-light" type="button">Your Saved</button>
+            {buttons}
         </div>
     )
 }

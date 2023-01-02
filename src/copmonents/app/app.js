@@ -13,12 +13,14 @@ class App extends Component {
             super(props);
             this.state ={
                 FilmDB: [
-                    { id: 1 , filmName:'Sumer', rating: 5},
-                    { id: 2 , filmName:'Out Days', rating: 4},
-                    { id: 3 , filmName:'Timbernborn', rating: 12},
-                    { id: 4 , filmName:'Dark Soul', rating: 10},
-                    { id: 5 , filmName:'House', rating: 8}
-                ]
+                    { id: 1 , filmName:'Sumer', rating: 5, best: false, saved: false},
+                    { id: 2 , filmName:'Out Days', rating: 4, best: false, saved: false},
+                    { id: 3 , filmName:'Timbernborn', rating: 12, best: false, saved: false},
+                    { id: 4 , filmName:'Dark Soul', rating: 11, best: false, saved: false},
+                    { id: 5 , filmName:'House', rating: 10, best: false, saved: false}
+                ],
+                searchName: '',
+                filter: 'all'
             }
             this.maxIdValue = 6;
     }
@@ -32,7 +34,9 @@ class App extends Component {
         const newItem = {
             id: this.maxIdValue++,
             filmName, 
-            rating
+            rating,
+            best: false,
+            saved: false
         }
         this.setState(({FilmDB}) => {
             const newArr = [...FilmDB, newItem];
@@ -41,17 +45,62 @@ class App extends Component {
             }
         });
     }
+
+    onPropStatus =(id, prop)=> {
+        this.setState(({FilmDB}) => ({
+            FilmDB: FilmDB.map(item => {
+                if(item.id === id){
+                    return {...item, [prop]: !item[prop]}
+                }
+                return item;
+            })
+        }));
+    }
+
+    searchFilm =(items, searchName)=> {
+            if(searchName.length === 0){
+                return items;
+            }
+            return items.filter(item => {
+                return item.filmName.indexOf(searchName) > -1
+            })
+    }
+    onUpdateSearch =(searchName)=>{
+        this.setState({searchName});
+    }
+
+    filterPanel =(items, filter)=>{
+        switch(filter){
+            case "best": 
+                return items.filter(item => item.best);
+            case "saved":
+                return items.filter(item => item.saved);
+            default: return items;
+        }
+    }
+
+    onFilterSelect =(filter)=>{
+        this.setState({filter});
+    }
+
     render(){
+        const allFilms = this.state.FilmDB.length,
+              {FilmDB, searchName,filter} = this.state,
+              allBestFilm = FilmDB.filter(item => item.best).length,
+              searching = this.filterPanel(this.searchFilm(FilmDB, searchName), filter);
         return(
             <div className='app'>
-                <AppInfo/>
+                <AppInfo allFilms = {allFilms}
+                         allBestFilm ={allBestFilm}/>
                 <div className="search-panel">
-                    <SearchPanel/>
-                    <AppFilter/>
+                    <SearchPanel onUpdateSearch= {this.onUpdateSearch}/>
+                    <AppFilter filter={filter} onFilterSelect={this.onFilterSelect}/>
                 </div>
                 <FilmList 
-                data={this.state.FilmDB}
-                onDelete = {this.deleteFilm}/>
+                FilmDB={searching}
+                onDelete = {this.deleteFilm}
+                onPropStatus = {this.onPropStatus}
+                />
                 <FilmAddForm onAddFilm = {this.addNewFilm}/>
     
             </div>

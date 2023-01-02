@@ -1,40 +1,22 @@
 import './film-list-item.css';
-import { Component } from 'react';
-class FilmListItem extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            best: false,
-            save: false,
-        }
+function FilmListItem (props) {
 
-    }
-
-    bestFilm =()=>{
-        this.setState(({best}) => ({best: !best}));
-    }
-
-    MySaved =()=>{
-        this.setState(({save})=> ({save: !save}));
-    }
-
-    render(){
-        const {filmName, rating, onDelete} = this.props,
-              {best, save} = this.state;
+        const {filmName, rating, onDelete, onPropStatus, best, saved} = props;
         let classListGroup = "list-group-item d-flex justify-content-between";
         if (best){
             classListGroup += ' increase';
         }
-        if(save){
+        if(saved){
             classListGroup += ' like';
         }
      return (
          <li className= {classListGroup} >
-             <span onClick={this.MySaved} className="list-group-item-label">{filmName}</span>
+             <span onClick={onPropStatus} className="list-group-item-label" data-status= "saved">{filmName}</span>
              <input type="text" className="list-group-item-input" defaultValue={rating + ' ★'}/>
              <div className= "d-flex justify-content-center align-items-center">
                  <button type="button"
-                        onClick={this.bestFilm}
+                        onClick={onPropStatus}
+                        data-status= "best"
                         className="btn-cookie btn-sm ">
                      <i className="fas fa-cookie"></i>
                  </button>
@@ -48,7 +30,7 @@ class FilmListItem extends Component {
              </div>
          </li>
      )
-    }
+    
 
 }
 

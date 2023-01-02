@@ -5,7 +5,7 @@ class FilmAddForm extends Component {
         super(props);
         this.state = {
             filmName: '',
-            rating: ''
+            rating: '',
         }
     }
     onValueChange = (e) =>{
@@ -14,12 +14,15 @@ class FilmAddForm extends Component {
         })
     }
     onSubmit = (e) => {
+        const {filmName, rating} = this.state;
         e.preventDefault();
-        this.props.onAddFilm(this.state.filmName, this.state.rating);
-        this.setState({
-            filmName: '',
-            rating: ''
-        })
+        if(filmName.length > 3 && filmName.length < 15 && +rating >= 1 && rating <=10){
+            this.props.onAddFilm(this.state.filmName, this.state.rating);
+            this.setState({
+                filmName: '',
+                rating: ''
+            })
+        }
     }
     render(){
         const {filmName, rating} = this.state;
@@ -32,12 +35,14 @@ class FilmAddForm extends Component {
                     <input type="text"
                         onChange={this.onValueChange}
                         value={filmName}
+                        data-total={filmName}
                         name="filmName"
                         className="form-control new-post-label"
                         placeholder="Film name" />
                     <input type="number"
                         onChange={this.onValueChange}
                         value={rating}
+                        data-total = {rating}
                         name="rating"
                         className="form-control new-post-label"
                         placeholder="rating" />
